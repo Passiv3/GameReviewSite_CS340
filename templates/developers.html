@@ -1,2 +1,17 @@
 <!DOCTYPE html>
-<h1>Developers page</h1>
+<h1>Developers Page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Developer ID</th>
+        <th>Developer Name</th>
+
+    </tr>
+    <tbody>
+    {% for item in developers %}
+    <tr>
+        <td>{{item['developer_id']}}</td>
+        <td>{{item['developer_name']}}</td>
+    </tr>
+    {% endfor %}
+    </table>

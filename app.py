@@ -6,7 +6,8 @@ import os
 app = Flask(__name__, template_folder='templates')
 
 # Routes 
-Games =[
+
+Games = [
 {
     "game_id": "1",
     "Developers_developer_id": 1,
@@ -27,7 +28,9 @@ Reviews = [
     "review_id": "1",
     "Games_games_id": "1",
     "Reviewers_reviewer_id": "1",
-    "review_date": "rating"
+    "review_date": "2020-10-14",
+    "rating": "6",
+    "review_content": "This game is gas"
 }
 ]
 
@@ -51,7 +54,6 @@ Genres = [
     "game_genre": "Racing"
 }
 ]
-
 
 @app.route('/')
 def root():

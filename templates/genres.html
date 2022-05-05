@@ -1,2 +1,16 @@
 <!DOCTYPE html>
 <h1>Genres page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Genre id</th>
+        <th>Game Genre</th>
+    </tr>
+    <tbody>
+    {% for item in genres %}
+    <tr>
+        <td>{{item['genre_id']}}</td>
+        <td>{{item['game_genre']}}</td>
+    </tr>
+    {% endfor %}
+    </table>

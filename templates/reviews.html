@@ -1,2 +1,24 @@
 <!DOCTYPE html>
 <h1>Reviews page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Review ID</th>
+        <th>Game ID</th>
+        <th>Reviewer ID</th>
+        <th>Date Review Published</th>
+        <th>Rating</th>
+        <th>Review Content</th>
+    </tr>
+    <tbody>
+    {% for item in reviews %}
+    <tr>
+        <td>{{item['review_id']}}</td>
+        <td>{{item['Games_games_id']}}</td>
+        <td>{{item['Reviewers_reviewer_id']}}</td>
+        <td>{{item['review_date']}}</td>
+        <td>{{item['rating']}}</td>
+        <td>{{item['review_content']}}</td>
+    </tr>
+    {% endfor %}
+    </table>
