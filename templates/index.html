@@ -1,21 +1,27 @@
 <!DOCTYPE html>
-<html>
-    <title>TeamDB</title>
-    <h1>Index Page</h1>
-    <body>
-        <a href = "games">Browse our games</a> 
-        <br>
-        <a href = "developers">Check out our developers</a>
-        <br>
-        <a href = "genres">We offer a wide variety of genres</a>
-        <br>
-        <a href = "reviewers">Meet the reviewers</a>
-        <br>
-        <a href = "reviews">Browse game reviews</a>
-        <br>
-        <a href = "gameGenres">Intersection table between game and genres</a>
-        <a href = "/">Home</a>
+<head>
+    <meta charset="utf-8">
+    <title>TeamDB - Game Reviews</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
 
+<header>
+    <h1>TeamDB's Game Review Site</h1>
+</header>
+
+    <body>
+        <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+        <a href = "games">Games</a> 
+        <br>
+        <a href = "developers">Developers</a>
+        <br>
+        <a href = "genres">Genres</a>
+        <br>
+        <a href = "reviewers">Reviewers</a>
+        <br>
+        <a href = "reviews">Reviews</a>
+        <br>
+        <a href = "gameGenres">GameGenres Intersection table</a>
     </body>
 
 </html>

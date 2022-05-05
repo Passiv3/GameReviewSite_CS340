@@ -1,59 +1,77 @@
 <!DOCTYPE html>
-<h1>Reviews page</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Review ID</th>
-        <th>Game ID</th>
-        <th>Reviewer ID</th>
-        <th>Date Review Published</th>
-        <th>Rating</th>
-        <th>Review Content</th>
-    </tr>
-    <tbody>
-    {% for item in reviews %}
-    <tr>
-        <td>{{item['review_id']}}</td>
-        <td>{{item['Games_games_id']}}</td>
-        <td>{{item['Reviewers_reviewer_id']}}</td>
-        <td>{{item['review_date']}}</td>
-        <td>{{item['rating']}}</td>
-        <td>{{item['review_content']}}</td>
-    </tr>
-    {% endfor %}
+<head>
+    <meta charset="utf-8">
+    <title>TeamDB - Reviews</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<header>
+    <h1>Reviews Page</h1>
+    <nav>
+        <a href = "/">Home</a> |
+        <a href = "games">Games</a> |
+        <a href = "reviewers">Reviewers</a> |
+        <a href = "reviews">Reviews</a> |
+        <a href = "genres">Genres</a> |
+        <a href = "gameGenres">GameGenreRelationships</a>
+    </nav>
+</header>
+
+<body>
+    <!--Creates Table for values-->
+    <table>
+        <thead>
+        <tr>
+            <th>Review ID</th>
+            <th>Game ID</th>
+            <th>Reviewer ID</th>
+            <th>Date Review Published</th>
+            <th>Rating</th>
+            <th>Review Content</th>
+        </tr>
+        <tbody>
+        {% for item in reviews %}
+        <tr>
+            <td>{{item['review_id']}}</td>
+            <td>{{item['Games_games_id']}}</td>
+            <td>{{item['Reviewers_reviewer_id']}}</td>
+            <td>{{item['review_date']}}</td>
+            <td>{{item['rating']}}</td>
+            <td>{{item['review_content']}}</td>
+        </tr>
+        {% endfor %}
     </table>
 
-    <body>
-        <form>
-            <!-- The fieldset element is used to group several controls and labels within a web form.-->
-            <fieldset>
-                <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
-                <legend>Add New Entry:</legend>
-                <label>Game:
-                    <input type="text" name="name" size="30" maxlength="100" required="required">
-                </label>
-                <br />
-                <label>Reviewer:
-                    <input type ="text" name="" size="30" maxlength="100" required ='required'>
-                </label>
-                <br />
-                <label>Write your thoughts:
-                    <input type="text" name="" size="50" height = "150%" maxlength="100" required = "required">
-                </label>
-                <br />
-                <label>Review date:
-                    <input type="date" name="date" size="30" maxlength="100" required = "required">
-                </label>
-                <br />
-                <label>Out of 10?:
-                    <input type="text" name="" size="30" maxlength="100" required = "required">
-                </label>
-            </fieldset>
+    <form>
+        <!-- The fieldset element is used to group several controls and labels within a web form.-->
+        <fieldset>
+            <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
+            <legend>Add New Entry:</legend>
+            <label>Game:
+                <input type="text" name="name" size="30" maxlength="100" required="required">
+            </label>
             <br />
-            <!-- We can use the button element or the input element to display the button -->
-            <!--input type="submit" value="Submit review" /-->
-            <button type="submit">Submit Game</button>
-        </form>
-        <a href = "/">Home</a>
-    </body>
+            <label>Reviewer:
+                <input type ="text" name="" size="30" maxlength="100" required ='required'>
+            </label>
+            <br />
+            <label>Write your thoughts:
+                <input type="text" name="" size="50" height = "150%" maxlength="100" required = "required">
+            </label>
+            <br />
+            <label>Review date:
+                <input type="date" name="date" size="30" maxlength="100" required = "required">
+            </label>
+            <br />
+            <label>Out of 10?:
+                <input type="text" name="" size="30" maxlength="100" required = "required">
+            </label>
+        </fieldset>
+        <br />
+        <!-- We can use the button element or the input element to display the button -->
+        <!--input type="submit" value="Submit review" /-->
+        <button type="submit">Submit Game</button>
+    </form>
+</body>
+
 </html>

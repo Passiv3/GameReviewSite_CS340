@@ -1,43 +1,62 @@
 <!DOCTYPE html>
-<h1>Developers Page</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Developer ID</th>
-        <th>Developer Name</th>
+<head>
+    <meta charset="utf-8">
+    <title>TeamDB - Developers</title>
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
+<header>
+    <h1>Developers Page</h1>
+    <nav>
+        <a href = "/">Home</a> |
+        <a href = "games">Games</a> |
+        <a href = "reviewers">Reviewers</a> |
+        <a href = "reviews">Reviews</a> |
+        <a href = "genres">Genres</a> |
+        <a href = "gameGenres">GameGenreRelationships</a>
+    </nav>
+</header>
 
-    </tr>
-    <tbody>
-    {% for item in developers %}
-    <tr>
-        <td>{{item['developer_id']}}</td>
-        <td>{{item['developer_name']}}</td>
-    </tr>
-    {% endfor %}
+    <!-- Citation for the following:
+        Date: 05/04/2022
+        Adapted from:
+        Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
+        Creates table for information
+    -->
+<body>
+    <table>
+        <thead>
+        <tr>
+            <th>Developer ID</th>
+            <th>Developer Name</th>
+
+        </tr>
+        <tbody>
+        {% for item in developers %}
+        <tr>
+            <td>{{item['developer_id']}}</td>
+            <td>{{item['developer_name']}}</td>
+        </tr>
+        {% endfor %}
     </table>
+    <!-- Citation for the following:
+        Date: 05/04/2022
+        Adapted from:
+        Source URL: https://replit.com/@coecs290/m351#index.html
+        Body consists of a form, fieldset.
+    -->
+        <!-- The fieldset element is used to group several controls and labels within a web form.-->
+    <fieldset>
+        <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
+        <legend>Add New Entry:</legend>
+        <label>New developer name:
+            <input type="text" name="name" size="30" maxlength="100" required="required">
+        </label>
+        <br />
 
-    <head>
-        <meta charset="utf-8">
-        <title>Module 3: Form</title>
-    </head>
-    
-    <body>
-        <form action="http://localhost:3000/review" method="GET">
-            <!-- The fieldset element is used to group several controls and labels within a web form.-->
-            <fieldset>
-                <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
-                <legend>Add New Entry:</legend>
-                <label>New developer name:
-                    <input type="text" name="name" size="30" maxlength="100" required="required">
-                </label>
-                <br />
-            </fieldset>
-            
-            <!-- We can use the button element or the input element to display the button -->
-            <!--input type="submit" value="Submit review" /-->
-            <button type="submit">Submit Developer</button>
-        </form>
-        <a href = "/">Home</a>
-    </body>
-    
-    </html>
+        <!-- We can use the button element or the input element to display the button -->
+        <!--input type="submit" value="Submit review" /-->
+        <button type="submit">Submit Developer</button>
+    </fieldset> 
+</body>
+
+</html>

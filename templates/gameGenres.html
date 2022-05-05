@@ -1,52 +1,64 @@
 <!DOCTYPE html>
-<h1>GamesGenre</h1>
-<table>
-    <thead>
-    <tr>
-        <th>Game ID</th>
-        <th>Genre ID</th>
-    </tr>
-    <tbody>
-    {% for item in gameGenres %}
-    <tr>
-        <td>{{item['Games_game_id']}}</td>
-        <td>{{item['Genres_genres_id']}}</td>
-    </tr>
-    {% endfor %}
-    </table>
+<head>
+  <meta charset="utf-8">
+  <title>TeamDB - GameGenres</title>
+  <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+</head>
 
-     <body>
-        <form action="/action_page.php">
-            <label for="GameName">Remove Genre from Game:</label>
-            <select name="GameName" id="GameName">
-              <option value="Need for Speed Heat">Need for Speed Heat</option>
-              <option value="FPS">FPS</option>
-              <option value="Shooter">Shooter</option>
-              <option value="Adventure">Adventure</option>
-              <option value="Hack-And-Slash">Hack-And-Slash</option>
-              <option value="Action">Action</option>
-            </select>
-            <br><br>
-          </form>
-    </body>
-</table>
+<header>
+  <h1>gameGenres</h1>
+  <nav>
+      <a href = "/">Home</a> |
+      <a href = "games">Games</a> |
+      <a href = "reviewers">Reviewers</a> |
+      <a href = "reviews">Reviews</a> |
+      <a href = "genres">Genres</a> |
+      <a href = "gameGenres">GameGenreRelationships</a>
+  </nav>
+</header>
 
 <body>
-   <form action="/action_page.php">
-       <label for="GenreName">Remove Genre from Game:</label>
-       <select name="GenreName" id="GenreName">
-         <option value="Racing">Racing</option>
-         <option value="FPS">FPS</option>
-         <option value="Shooter">Shooter</option>
-         <option value="Adventure">Adventure</option>
-         <option value="Hack-And-Slash">Hack-And-Slash</option>
-         <option value="Action">Action</option>
-       </select>
-       <br><br>
-       <input type="submit" value="Submit">
-     </form>
-     <a href = "/">Home</a>
+  <table>
+      <thead>
+      <tr>
+        <th>Game ID</th>
+        <th>Genre ID</th>
+      </tr>
+      <tbody>
+      {% for item in gameGenres %}
+      <tr>
+          <td>{{item['Games_game_id']}}</td>
+          <td>{{item['Genres_genres_id']}}</td>
+      </tr>
+      {% endfor %}
+  </table>
+
+  <form action="/action_page.php">
+    <label for="GameName">Remove Genre from Game:</label>
+    <select name="GameName" id="GameName">
+      <option value="Need for Speed Heat">Need for Speed Heat</option>
+      <option value="FPS">FPS</option>
+      <option value="Shooter">Shooter</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Hack-And-Slash">Hack-And-Slash</option>
+      <option value="Action">Action</option>
+    </select>
+    <br><br>
+    </form>
+
+  <form action="/action_page.php">
+    <label for="GenreName">Remove Genre from Game:</label>
+    <select name="GenreName" id="GenreName">
+      <option value="Racing">Racing</option>
+      <option value="FPS">FPS</option>
+      <option value="Shooter">Shooter</option>
+      <option value="Adventure">Adventure</option>
+      <option value="Hack-And-Slash">Hack-And-Slash</option>
+      <option value="Action">Action</option>
+    </select>
+    <br><br>
+  </form>
+  <input type="submit" value="Submit">
 </body>
 
 </html>
-    </html>
