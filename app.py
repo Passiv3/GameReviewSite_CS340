@@ -13,6 +13,26 @@ app = Flask(__name__)
 def root():
     return render_template("index.html")
 
+@app.route('/games')
+def gamePage():
+    return render_template("games.html")
+
+@app.route('/developers')
+def developerPage():
+    return render_template("developers.html")
+
+@app.route('/genres')
+def genrePage():
+    return render_template("genres.html")
+
+@app.route('/reviewers')
+def reviewerPage():
+    return render_template("reviewers.html")
+
+@app.route('/reviews')
+def reviewsPage():
+    return render_template("reviews.html")
+
 # Listener
 
 
