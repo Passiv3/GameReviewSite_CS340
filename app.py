@@ -42,6 +42,50 @@ if __name__ == "__main__":
     
     app.run(port=port, debug = True) 
 
+games =
+[
+{
+    "game_id": "1",
+    "Developers_developer_id": 1,
+    "game_name": "Need for Speed Heat",
+    "release_date": "2019-11-08"
+}
+]
+
+developers = 
+[
+{
+    "developer_id": "1"
+    "developer_name": "Ghost Games"
+}
+]
+
+Reviews = 
+[
+{
+    "review_id": "1"
+    "Games_games_id": "1"
+    "Reviewers_reviewer_id": "1"
+    "review_date": "rating"
+}
+]
+
+Reviewers =
+[
+{
+    "reviewer_id": "1"
+    "reviewer_name": "Gamecritic"
+    "number_of_review": 2
+}
+]
+
+GameGenres = 
+[
+{
+    "Games_game_id" = "1"
+    "Genres_genre_id" = "1"
+}
+]    
 Genres = 
 [
 {
