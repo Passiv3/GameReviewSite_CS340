@@ -2,18 +2,18 @@
 <table>
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Location</th>
-        <th>Favorite Language</th>
+        <th>Game ID</th>
+        <th>Developer ID</th>
+        <th>Game Name</th>
+        <th>Release Date</th>
     </tr>
     <tbody>
     {% for item in people %}
     <tr>
-        <td>{{item['name']}}</td>
-        <td>{{item['age']}}</td>
-        <td>{{item['location']}}</td>
-        <td>{{item['favorite_color']}}</td>
+        <td>{{item['game_id']}}</td>
+        <td>{{item['Developers_developer_id']}}</td>
+        <td>{{item['game_name']}}</td>
+        <td>{{item['release_date']}}</td>
     </tr>
     {% endfor %}
     </table>
