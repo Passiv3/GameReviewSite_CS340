@@ -42,7 +42,7 @@ if __name__ == "__main__":
     
     app.run(port=port, debug = True) 
 
-games =
+Games =
 [
 {
     "game_id": "1",
@@ -52,7 +52,7 @@ games =
 }
 ]
 
-developers = 
+Developers = 
 [
 {
     "developer_id": "1"
