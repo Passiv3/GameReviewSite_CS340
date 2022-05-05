@@ -3,7 +3,7 @@ import os
 
 # Configuration
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
 
 # Routes 
 Games =[
@@ -82,6 +82,6 @@ def reviewsPage():
 
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59124)) 
+    port = int(os.environ.get('PORT', 59129)) 
     
     app.run(port=port, debug = True) 
