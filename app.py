@@ -41,3 +41,11 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 59123)) 
     
     app.run(port=port, debug = True) 
+
+Genres = 
+[
+{
+    "genre_id": "1"
+    "game_genre": "Racing"
+}
+]
