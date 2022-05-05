@@ -1,2 +1,18 @@
 <!DOCTYPE html>
 <h1>Reviewers page</h1>
+<table>
+    <thead>
+    <tr>
+        <th>Reviewer ID</th>
+        <th>Reviewer Name</th>
+        <th>Number of Reviews</th>
+    </tr>
+    <tbody>
+    {% for item in reviewers %}
+    <tr>
+        <td>{{item['reviewer_id']}}</td>
+        <td>{{item['reviewer_name']}}</td>
+        <td>{{item['number_of_review']}}</td>
+    </tr>
+    {% endfor %}
+    </table>

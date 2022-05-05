@@ -28,7 +28,9 @@ Reviews = [
     "review_id": "1",
     "Games_games_id": "1",
     "Reviewers_reviewer_id": "1",
-    "review_date": "rating"
+    "review_date": "2020-10-14",
+    "rating": "6",
+    "review_content": "This game is gas"
 }
 ]
 
@@ -63,19 +65,19 @@ def gamePage():
 
 @app.route('/developers')
 def developerPage():
-    return render_template("developers.html", developer = Developers)
+    return render_template("developers.html", developers = Developers)
 
 @app.route('/genres')
 def genrePage():
-    return render_template("genres.html")
+    return render_template("genres.html", genres = Genres)
 
 @app.route('/reviewers')
 def reviewerPage():
-    return render_template("reviewers.html")
+    return render_template("reviewers.html", reviewers = Reviewers)
 
 @app.route('/reviews')
 def reviewsPage():
-    return render_template("reviews.html")
+    return render_template("reviews.html", reviews = Reviews)
 
 # Listener
 
