@@ -55,6 +55,17 @@ Genres = [
 }
 ]
 
+GamesGenre = [
+{
+    "Games_game_id": "1",
+    "Genres_genres_id": "1"
+}
+]
+
+@app.route('/gameGenres')
+def gameGenres():
+    return render_template("gameGenres.html", gameGenres = GamesGenre)
+
 @app.route('/')
 def root():
     return render_template("index.html")
