@@ -28,7 +28,9 @@ Reviews = [
     "review_id": "1",
     "Games_games_id": "1",
     "Reviewers_reviewer_id": "1",
-    "review_date": "rating"
+    "review_date": "2020-10-14",
+    "rating": "6",
+    "review_content": "This game is gas"
 }
 ]
 
