@@ -22,3 +22,38 @@
     </tr>
     {% endfor %}
     </table>
+
+    <body>
+        <form>
+            <!-- The fieldset element is used to group several controls and labels within a web form.-->
+            <fieldset>
+                <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
+                <legend>Add New Entry:</legend>
+                <label>Game:
+                    <input type="text" name="name" size="30" maxlength="100" required="required">
+                </label>
+                <br />
+                <label>Reviewer:
+                    <input type ="text" name="" size="30" maxlength="100" required ='required'>
+                </label>
+                <br />
+                <label>Write your thoughts:
+                    <input type="text" name="" size="50" height = "150%" maxlength="100" required = "required">
+                </label>
+                <br />
+                <label>Review date:
+                    <input type="date" name="date" size="30" maxlength="100" required = "required">
+                </label>
+                <br />
+                <label>Out of 10?:
+                    <input type="text" name="" size="30" maxlength="100" required = "required">
+                </label>
+            </fieldset>
+            <br />
+            <!-- We can use the button element or the input element to display the button -->
+            <!--input type="submit" value="Submit review" /-->
+            <button type="submit">Submit Game</button>
+        </form>
+        <a href = "/">Home</a>
+    </body>
+</html>
