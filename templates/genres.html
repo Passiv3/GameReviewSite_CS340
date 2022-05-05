@@ -10,6 +10,7 @@
     <nav>
         <a href = "/">Home</a> |
         <a href = "games">Games</a> |
+        <a href = "developers">Developers</a> |
         <a href = "reviewers">Reviewers</a> |
         <a href = "reviews">Reviews</a> |
         <a href = "genres">Genres</a> |
@@ -20,17 +21,19 @@
 <body>
     <table>
         <thead>
-        <tr>
-            <th>Genre id</th>
-            <th>Game Genre</th>
-        </tr>
+            <tr>
+                <th>Genre id</th>
+                <th>Game Genre</th>
+            </tr>
+        </thead>
         <tbody>
-        {% for item in genres %}
-        <tr>
-            <td>{{item['genre_id']}}</td>
-            <td>{{item['game_genre']}}</td>
-        </tr>
-        {% endfor %}
+            {% for item in genres %}
+            <tr>
+                <td>{{item['genre_id']}}</td>
+                <td>{{item['game_genre']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
 
     <form action="http://localhost:3000/review" method="GET">
@@ -39,7 +42,7 @@
             <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
             <legend>Add Genre:</legend>
             <label>Genre:
-                <input type="text" name="name" size="30" maxlength="100" required="required">
+                <input type="text" name="game_genre" size="30" maxlength="100" required="required">
             </label>
             <br />
         </fieldset>

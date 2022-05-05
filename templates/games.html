@@ -9,6 +9,7 @@
     <nav>
         <a href = "/">Home</a> |
         <a href = "games">Games</a> |
+        <a href = "developers">Developers</a> |
         <a href = "reviewers">Reviewers</a> |
         <a href = "reviews">Reviews</a> |
         <a href = "genres">Genres</a> |
@@ -19,22 +20,23 @@
     <div class = "infoTable">
         <table>
             <thead>
-            <tr>
-                <th>Game ID</th>
-                <th>Developer ID</th>
-                <th>Game Name</th>
-                <th>Release Date</th>
-            </tr>
+                <tr>
+                    <th>Game ID</th>
+                    <th>Developer ID</th>
+                    <th>Game Name</th>
+                    <th>Release Date</th>
+                </tr>
+            </thead>
             <tbody>
-            {% for item in games %}
-            <tr>
-                <td>{{item['game_id']}}</td>
-                <td>{{item['Developers_developer_id']}}</td>
-                <td>{{item['game_name']}}</td>
-                <td>{{item['release_date']}}</td>
-            </tr>
-            {% endfor %}
-            </table>
+                {% for item in games %}
+                <tr>
+                    <td>{{item['game_id']}}</td>
+                    <td>{{item['Developers_developer_id']}}</td>
+                    <td>{{item['game_name']}}</td>
+                    <td>{{item['release_date']}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
     </div>
     <form>
@@ -43,13 +45,17 @@
             <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
             <legend>Add New Entry:</legend>
             <label for="gameName">Game Name:</label>
-                <input type="text" name="name" size="30" maxlength="100" required="required">
+                <input type="text" name="game_name" size="30" maxlength="100" required="required">
             <br />
             <label for="developerName">Developer:</label>
-                <input type ="text" name="" size="30" maxlength="100" required ='required'>
+            <select name="developer" id="developerName">
+                {% for item in developers %}
+                <option value={{item.developer_id}}>{{item.developer_name}}</option>
+                {% endfor %}
+            </select>
             <br />
             <label for="releaseDate">Release Date:</label>
-                <input type="date" name="date" size="30" maxlength="100" required = "required">
+                <input type="date" name="release_date" size="30" maxlength="100" required = "required">
             <br />
             <br />
             <button type="submit">Submit Game</button>

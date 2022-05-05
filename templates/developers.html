@@ -9,6 +9,7 @@
     <nav>
         <a href = "/">Home</a> |
         <a href = "games">Games</a> |
+        <a href = "developers">Developers</a> |
         <a href = "reviewers">Reviewers</a> |
         <a href = "reviews">Reviews</a> |
         <a href = "genres">Genres</a> |
@@ -16,27 +17,29 @@
     </nav>
 </header>
 
-    <!-- Citation for the following:
-        Date: 05/04/2022
-        Adapted from:
-        Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
-        Creates table for information
-    -->
 <body>
+
+    <!-- Citation for the following:
+    Date: 05/04/2022
+    Adapted from:
+    Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
+    Creates table for information
+    -->
     <table>
         <thead>
-        <tr>
-            <th>Developer ID</th>
-            <th>Developer Name</th>
-
-        </tr>
+            <tr>
+                <th>Developer ID</th>
+                <th>Developer Name</th>
+            </tr>
+        </thead>
         <tbody>
-        {% for item in developers %}
-        <tr>
-            <td>{{item['developer_id']}}</td>
-            <td>{{item['developer_name']}}</td>
-        </tr>
-        {% endfor %}
+            {% for item in developers %}
+            <tr>
+                <td>{{item['developer_id']}}</td>
+                <td>{{item['developer_name']}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
     </table>
     <!-- Citation for the following:
         Date: 05/04/2022
@@ -49,7 +52,7 @@
         <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
         <legend>Add New Entry:</legend>
         <label>New developer name:
-            <input type="text" name="name" size="30" maxlength="100" required="required">
+            <input type="text" name="developer_name" size="30" maxlength="100" required="required">
         </label>
         <br />
 

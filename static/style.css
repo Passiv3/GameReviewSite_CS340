@@ -3,22 +3,21 @@
 }
 
 h1{
-    font-size: larger;
-    margin: 0;
-    padding: 0;
-    border: 0;
+    font-size: x-large;
+    padding: 10px;
     color:rgba(18, 166, 30, 0.983);
     background-color: black;
+    font-family: sans-serif;
 }
 
 fieldset{
     width : 50%;
 }
 
-header{
-    margin: 0;
-    padding: 0;
-    border: 0;
+nav{
+    border: 1px solid black;
+    padding: 10px;
+    background-color: darkgray;
 }
 
 table, th, td {
