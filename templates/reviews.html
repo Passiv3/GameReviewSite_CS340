@@ -3,48 +3,26 @@
     <meta charset="utf-8">
     <title>TeamDB - Reviews</title>
     <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
-<header>
-    <h1>Reviews Page</h1>
-    <nav>
-        <a href = "/">Home</a> |
-        <a href = "games">Games</a> |
-        <a href = "developers">Developers</a> |
-        <a href = "reviewers">Reviewers</a> |
-        <a href = "reviews">Reviews</a> |
-        <a href = "genres">Genres</a> |
-        <a href = "gameGenres">GameGenreRelationships</a>
-    </nav>
-</header>
-
 <body>
+    <header>
+        <h1>Reviews Page</h1>
+        <nav>
+            <ul>
+              <li><a href = "/">Home</a></li>
+              <li><a href = "games">Games</a></li>
+              <li><a href = "developers">Developers</a></li>
+              <li><a href = "reviewers">Reviewers</a></li>
+              <li><a href = "reviews">Reviews</a></li>
+              <li><a href = "genres">Genres</a></li>
+              <li><a href = "gameGenres">GameGenreRelationships</a></li>
+              <li><a href = "about">About</a></li>
+            </ul>
+          </nav>
+    </header>    
     <!--Creates Table for values-->
-    <table>
-        <thead>
-            <tr>
-                <th>Review ID</th>
-                <th>Game ID</th>
-                <th>Reviewer ID</th>
-                <th>Date Review Published</th>
-                <th>Rating</th>
-                <th>Review Content</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in reviews %}
-            <tr>
-                <td>{{item['review_id']}}</td>
-                <td>{{item['Games_games_id']}}</td>
-                <td>{{item['Reviewers_reviewer_id']}}</td>
-                <td>{{item['review_date']}}</td>
-                <td>{{item['rating']}}</td>
-                <td>{{item['review_content']}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
     <form>
         <!-- The fieldset element is used to group several controls and labels within a web form.-->
         <fieldset>
@@ -52,15 +30,17 @@
             <legend>Add New Entry:</legend>
             <label>Game:
                 <select name = "gameName">
-                    <option value = "Devil May Cry V">Devil May Cry V</option>
-                    <option value = "Death Stranding">Death Stranding</option>
+                    {% for item in games %}
+                    <option value = {{item.game_id}}>{{item.game_name}}</option>
+                    {% endfor %}
                 </select>
             </label>
             <br />
             <label>Reviewer:
-                <select name = "Reviewer">
-                    <option value = "IGN">IGN</option>
-                    <option value = "Gamecritic">Gamecritic</option>
+                <select name = "reviewerName">
+                    {% for item in reviewers %}
+                    <option value = {{item.reviewer_id}}>{{item.reviewer_name}}</option>
+                    {% endfor %}
                 </select>
             </label>
             <br />
@@ -93,12 +73,39 @@
         <!-- We can use the button element or the input element to display the button -->
         <!--input type="submit" value="Submit review" /-->
     </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Review ID</th>
+                <th>Game ID</th>
+                <th>Reviewer ID</th>
+                <th>Date Review Published</th>
+                <th>Rating</th>
+                <th>Review Content</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in reviews %}
+            <tr>
+                <td>{{item['review_id']}}</td>
+                <td>{{item['Games_games_id']}}</td>
+                <td>{{item['Reviewers_reviewer_id']}}</td>
+                <td>{{item['review_date']}}</td>
+                <td>{{item['rating']}}</td>
+                <td>{{item['review_content']}}</td>
+                <td><i class="material-icons">edit</i></td>
+                <td><i class = "material-icons">delete</i></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <footer>
+        <h2>
 
-    <form>
-        <fieldset>
-            <legend>Update Review</legend>
-        </fieldset>
-    </form>
+        </h2>
+    </footer>
 </body>
 
 </html>

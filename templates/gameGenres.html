@@ -5,20 +5,44 @@
   <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
 
+<body>
 <header>
   <h1>gameGenres</h1>
   <nav>
-      <a href = "/">Home</a> |
-      <a href = "games">Games</a> |
-      <a href = "developers">Developers</a> |
-      <a href = "reviewers">Reviewers</a> |
-      <a href = "reviews">Reviews</a> |
-      <a href = "genres">Genres</a> |
-      <a href = "gameGenres">GameGenreRelationships</a>
+    <ul>
+      <li><a href = "/">Home</a></li>
+      <li><a href = "games">Games</a></li>
+      <li><a href = "developers">Developers</a></li>
+      <li><a href = "reviewers">Reviewers</a></li>
+      <li><a href = "reviews">Reviews</a></li>
+      <li><a href = "genres">Genres</a></li>
+      <li><a href = "gameGenres">GameGenreRelationships</a></li>
+      <li><a href = "about">About</a></li>
+    </ul>
   </nav>
 </header>
 
-<body>
+  <form action>
+    <fieldset>
+        <label for="GameName">Select game:</label>
+        <select name="GameName" id="GameName">
+          {% for item in games %}
+          <option value={{item.game_id}}>{{item.game_name}}</option>
+          {% endfor %}
+        </select>
+        <br><br>
+
+        <label for="GenreName">Remove Genre from Game:</label>
+        <select name="GenreName" id="GenreName">
+          {% for item in genres %}
+          <option value={{item.genre_id}}>{{item.game_genre}}</option>
+          {% endfor %}
+        </select>
+        <br><br>
+        <input type="submit" value="Submit">
+    </fieldset>
+  </form>
+
   <table>
       <thead>
         <tr>
@@ -35,33 +59,6 @@
       {% endfor %}
       </tbody> 
   </table>
-
-
-  <fieldset>
-    <legend>Delete GameGenre relationship</legend>
-    <form action>
-      <label for="GameName">Select game:</label>
-      <select name="GameName" id="GameName">
-        <option value="Need for Speed Heat">Need for Speed Heat</option>
-        <option value="Counter-Strike: Global Offensive">Counter-Strike: Global Offensive</option>
-      </select>
-      <br><br>
-      </form>
-
-    <form action>
-      <label for="GenreName">Remove Genre from Game:</label>
-      <select name="GenreName" id="GenreName">
-        <option value="Racing">Racing</option>
-        <option value="FPS">FPS</option>
-        <option value="Shooter">Shooter</option>
-        <option value="Adventure">Adventure</option>
-        <option value="Hack-And-Slash">Hack-And-Slash</option>
-        <option value="Action">Action</option>
-      </select>
-      <br><br>
-    </form>
-    <input type="submit" value="Submit">
-</fieldset>
 </body>
 
 </html>

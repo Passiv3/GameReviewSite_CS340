@@ -56,7 +56,7 @@ Developers = [
 },
 {
     "developer_id": "4",
-    "developer_name": "Kojia Production"
+    "developer_name": "Kojima Production"
 }
 ]
 
@@ -68,13 +68,64 @@ Reviews = [
     "review_date": "2020-10-14",
     "rating": "6",
     "review_content": "This game is gas"
-}
+},
+{
+    "review_id": "2",
+    "Games_games_id": "2",
+    "Reviewers_reviewer_id": "1",
+    "review_date": "2017-12-11",
+    "rating": "7",
+    "review_content": "This game is pretty good, but the matchmaking is terrible"
+},
+{
+    "review_id": "3",
+    "Games_games_id": "3",
+    "Reviewers_reviewer_id": "1",
+    "review_date": "2019-08-19",
+    "rating": "9",
+    "review_content": "The music and gameplay is awesome, classic Monster Hunter gameplay"
+},
+{
+    "review_id": "4",
+    "Games_games_id": "3",
+    "Reviewers_reviewer_id": "1",
+    "review_date": "2019-10-25",
+    "rating": "8",
+    "review_content": "Excellent entry of Monster Hunter"
+},
+{
+    "review_id": "5",
+    "Games_games_id": "1",
+    "Reviewers_reviewer_id": "1",
+    "review_date": "2019-10-25",
+    "rating": "8",
+    "review_content": "Smokin Sexy Style! The action for the long awaited sequel was worth the wait!"
+},
+{
+    "review_id": "6",
+    "Games_games_id": "5",
+    "Reviewers_reviewer_id": "2",
+    "review_date": "2017-12-11",
+    "rating": "7",
+    "review_content": "Very interesting game by Hideo Kojima"
+},
+
 ]
 
 Reviewers =[
 {
     "reviewer_id": "1",
     "reviewer_name": "Gamecritic",
+    "number_of_review": 2
+},
+{
+    "reviewer_id": "2",
+    "reviewer_name": "IGN",
+    "number_of_review": 2
+},
+{
+    "reviewer_id": "3",
+    "reviewer_name": "Gamespot",
     "number_of_review": 2
 }
 ]
@@ -142,12 +193,15 @@ def reviewerPage():
 
 @app.route('/reviews')
 def reviewsPage():
-    return render_template("reviews.html", reviews = Reviews)
+    return render_template("reviews.html", reviews = Reviews, games = Games, reviewers = Reviewers)
 
 @app.route('/gameGenres')
 def gameGenres():
     return render_template("gameGenres.html", gameGenres = GamesGenre, games = Games, genres = Genres)
 
+@app.route('/about')
+def about():
+    return render_template("about.html")
 # Listener
 
 

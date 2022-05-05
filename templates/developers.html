@@ -4,20 +4,44 @@
     <title>TeamDB - Developers</title>
     <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
-<header>
-    <h1>Developers Page</h1>
-    <nav>
-        <a href = "/">Home</a> |
-        <a href = "games">Games</a> |
-        <a href = "developers">Developers</a> |
-        <a href = "reviewers">Reviewers</a> |
-        <a href = "reviews">Reviews</a> |
-        <a href = "genres">Genres</a> |
-        <a href = "gameGenres">GameGenreRelationships</a>
-    </nav>
-</header>
 
 <body>
+    <header>
+        <h1>Developers Page</h1>
+        <nav>
+            <ul>
+              <li><a href = "/">Home</a></li>
+              <li><a href = "games">Games</a></li>
+              <li><a href = "developers">Developers</a></li>
+              <li><a href = "reviewers">Reviewers</a></li>
+              <li><a href = "reviews">Reviews</a></li>
+              <li><a href = "genres">Genres</a></li>
+              <li><a href = "gameGenres">GameGenreRelationships</a></li>
+              <li><a href = "about">About</a></li>
+            </ul>
+          </nav>
+    </header>
+    <!-- Citation for the following:
+        Date: 05/04/2022
+        Adapted from:
+        Source URL: https://replit.com/@coecs290/m351#index.html
+        Body consists of a form, fieldset.
+    -->
+        <!-- The fieldset element is used to group several controls and labels within a web form.-->
+        <form>
+            <fieldset>
+                <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
+                <legend>Add New Entry:</legend>
+                <label>New developer name:
+                    <input type="text" name="developer_name" size="30" maxlength="100" required="required">
+                </label>
+                <br />
+    
+                <!-- We can use the button element or the input element to display the button -->
+                <!--input type="submit" value="Submit review" /-->
+                <button type="submit">Submit Developer</button>
+            </fieldset> 
+        </form>
 
     <!-- Citation for the following:
     Date: 05/04/2022
@@ -41,25 +65,7 @@
             {% endfor %}
         </tbody>
     </table>
-    <!-- Citation for the following:
-        Date: 05/04/2022
-        Adapted from:
-        Source URL: https://replit.com/@coecs290/m351#index.html
-        Body consists of a form, fieldset.
-    -->
-        <!-- The fieldset element is used to group several controls and labels within a web form.-->
-    <fieldset>
-        <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
-        <legend>Add New Entry:</legend>
-        <label>New developer name:
-            <input type="text" name="developer_name" size="30" maxlength="100" required="required">
-        </label>
-        <br />
 
-        <!-- We can use the button element or the input element to display the button -->
-        <!--input type="submit" value="Submit review" /-->
-        <button type="submit">Submit Developer</button>
-    </fieldset> 
 </body>
 
 </html>

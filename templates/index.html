@@ -5,23 +5,35 @@
     <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
 </head>
 
-<header>
-    <h1>TeamDB's Game Review Site</h1>
-</header>
-
-    <body>
-        <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
-        <a href = "games">Games</a> 
-        <br>
-        <a href = "developers">Developers</a>
-        <br>
-        <a href = "genres">Genres</a>
-        <br>
-        <a href = "reviewers">Reviewers</a>
-        <br>
-        <a href = "reviews">Reviews</a>
-        <br>
-        <a href = "gameGenres">GameGenres Intersection table</a>
-    </body>
+<body>
+    <header>
+        <h1>TeamDB's Game Review Site</h1>
+        <nav>
+            <ul>
+              <li><a href = "/">Home</a></li>
+              <li><a href = "games">Games</a></li>
+              <li><a href = "developers">Developers</a></li>
+              <li><a href = "reviewers">Reviewers</a></li>
+              <li><a href = "reviews">Reviews</a></li>
+              <li><a href = "genres">Genres</a></li>
+              <li><a href = "gameGenres">GameGenreRelationships</a></li>
+              <li><a href = "about">About</a></li>
+            </ul>
+          </nav>
+    </header>
+    
+    <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <a href = "games">Games</a> 
+    <br>
+    <a href = "developers">Developers</a>
+    <br>
+    <a href = "genres">Genres</a>
+    <br>
+    <a href = "reviewers">Reviewers</a>
+    <br>
+    <a href = "reviews">Reviews</a>
+    <br>
+    <a href = "gameGenres">GameGenres Intersection table</a>
+</body>
 
 </html>
