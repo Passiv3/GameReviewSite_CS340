@@ -6,7 +6,8 @@ import os
 app = Flask(__name__)
 
 # Routes 
-Games =[
+
+Games = [
 {
     "game_id": "1",
     "Developers_developer_id": 1,
@@ -51,7 +52,6 @@ Genres = [
     "game_genre": "Racing"
 }
 ]
-
 
 @app.route('/')
 def root():
