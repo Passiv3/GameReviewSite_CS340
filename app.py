@@ -80,7 +80,7 @@ Reviews = [
 {
     "review_id": "3",
     "Games_games_id": "3",
-    "Reviewers_reviewer_id": "1",
+    "Reviewers_reviewer_id": "2",
     "review_date": "2019-08-19",
     "rating": "9",
     "review_content": "The music and gameplay is awesome, classic Monster Hunter gameplay"
@@ -88,7 +88,7 @@ Reviews = [
 {
     "review_id": "4",
     "Games_games_id": "3",
-    "Reviewers_reviewer_id": "1",
+    "Reviewers_reviewer_id": "3",
     "review_date": "2019-10-25",
     "rating": "8",
     "review_content": "Excellent entry of Monster Hunter"
@@ -96,7 +96,7 @@ Reviews = [
 {
     "review_id": "5",
     "Games_games_id": "1",
-    "Reviewers_reviewer_id": "1",
+    "Reviewers_reviewer_id": "3",
     "review_date": "2019-10-25",
     "rating": "8",
     "review_content": "Smokin Sexy Style! The action for the long awaited sequel was worth the wait!"
@@ -134,7 +134,35 @@ GameGenres = [
 {
     "Games_game_id" : "1",
     "Genres_genre_id" : "1"
-}
+},
+{
+    "Games_game_id" : "2",
+    "Genres_genre_id" : "2"
+},
+{
+    "Games_game_id" : "2",
+    "Genres_genre_id" : "3"
+},
+{
+    "Games_game_id" : "3",
+    "Genres_genre_id" : "4"
+},
+{
+    "Games_game_id" : "4",
+    "Genres_genre_id" : "4"
+},
+{
+    "Games_game_id" : "4",
+    "Genres_genre_id" : "5"
+},
+{
+    "Games_game_id" : "5",
+    "Genres_genre_id" : "4"
+},
+{
+    "Games_game_id" : "5",
+    "Genres_genre_id" : "6"
+},
 ]
 
 Genres = [
@@ -164,13 +192,6 @@ Genres = [
 },
 ]
 
-GamesGenre = [
-{
-    "Games_game_id": "1",
-    "Genres_genres_id": "1"
-}
-]
-
 @app.route('/')
 def root():
     return render_template("index.html")
@@ -197,13 +218,12 @@ def reviewsPage():
 
 @app.route('/gameGenres')
 def gameGenres():
-    return render_template("gameGenres.html", gameGenres = GamesGenre, games = Games, genres = Genres)
+    return render_template("gameGenres.html", gameGenres = GameGenres, games = Games, genres = Genres)
 
 @app.route('/about')
 def about():
     return render_template("about.html")
 # Listener
-
 
 if __name__ == "__main__":
     # Port is second argument here
