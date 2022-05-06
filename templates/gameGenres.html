@@ -6,22 +6,28 @@
 </head>
 
 <body>
-<header>
-  <h1>gameGenres</h1>
-  <nav>
-    <ul>
-      <li><a href = "/">Home</a></li>
-      <li><a href = "games">Games</a></li>
-      <li><a href = "developers">Developers</a></li>
-      <li><a href = "reviewers">Reviewers</a></li>
-      <li><a href = "reviews">Reviews</a></li>
-      <li><a href = "genres">Genres</a></li>
-      <li><a href = "gameGenres">GameGenreRelationships</a></li>
-      <li><a href = "about">About</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <h1>gameGenres</h1>
+    <nav>
+      <ul>
+        <li><a href = "/">Home</a></li>
+        <li><a href = "games">Games</a></li>
+        <li><a href = "developers">Developers</a></li>
+        <li><a href = "reviewers">Reviewers</a></li>
+        <li><a href = "reviews">Reviews</a></li>
+        <li><a href = "genres">Genres</a></li>
+        <li><a href = "gameGenres">GameGenreRelationships</a></li>
+        <li><a href = "about">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
+  <!-- Citation for the following:
+  Date: 05/04/2022
+  Adapted from:
+  Source URL: https://replit.com/@coecs290/m351
+  Dropdown menus adapted from this code
+  -->
   <form action>
     <fieldset>
         <label for="GameName">Select game:</label>
@@ -43,6 +49,12 @@
     </fieldset>
   </form>
 
+  <!-- Citation for the following:
+  Date: 05/04/2022
+  Adapted from:
+  Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
+  Creates table for information
+  -->
   <table>
       <thead>
         <tr>
@@ -54,7 +66,7 @@
       {% for item in gameGenres %}
         <tr>
           <td>{{item['Games_game_id']}}</td>
-          <td>{{item['Genres_genres_id']}}</td>
+          <td>{{item['Genres_genre_id']}}</td>
         </tr>
       {% endfor %}
       </tbody> 

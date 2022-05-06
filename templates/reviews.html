@@ -22,6 +22,12 @@
             </ul>
           </nav>
     </header>    
+    <!-- Citation for the following:
+    Date: 05/04/2022
+    Adapted from:
+    Source URL: https://replit.com/@coecs290/m351#index.html
+    Body consists of a form, fieldset.
+    -->
     <!--Creates Table for values-->
     <form>
         <!-- The fieldset element is used to group several controls and labels within a web form.-->
@@ -73,6 +79,12 @@
         <!-- We can use the button element or the input element to display the button -->
         <!--input type="submit" value="Submit review" /-->
     </form>
+    <!-- Citation for the following:
+    Date: 05/04/2022
+    Adapted from:
+    Source URL: https://github.com/osu-cs340-ecampus/flask-starter-app
+    Creates table for information
+    -->
     <table>
         <thead>
             <tr>
@@ -95,17 +107,12 @@
                 <td>{{item['review_date']}}</td>
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
-                <td><i class="material-icons">edit</i></td>
-                <td><i class = "material-icons">delete</i></td>
+                <td><button><i class="material-icons">edit</i></button></td>
+                <td><button><i class = "material-icons">delete</i></td></button>
             </tr>
             {% endfor %}
         </tbody>
     </table>
-    <footer>
-        <h2>
-
-        </h2>
-    </footer>
 </body>
 
 </html>
