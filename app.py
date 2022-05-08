@@ -1,232 +1,107 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, json
+from flask_mysqldb import MySQL
+from flask import request
+import database.db_connector as db
 import os
 
 # Configuration
 
 app = Flask(__name__, template_folder='templates')
 
+#database connection
+app.config["MYSQL_HOST"] = "classmysql.engr.oregonstate.edu"
+app.config["MYSQL_USER"] = "cs340_chundann"
+app.config["MYSQL_PASSWORD"] = "8473"
+app.config["MYSQL_DB"] = "cs340_chundann"
+app.config["MYSQL_CURSORCLASS"] = "DictCursor"
+
+db_connection = db.connect_to_database()
+mysql = MySQL(app)
+
 # Routes 
-
-# Temporary hardcoded data for step 2, these will be replaced with calls to a db in the next step
-Games = [
-{
-    "game_id": "1",
-    "Developers_developer_id": 1,
-    "game_name": "Need for Speed Heat",
-    "release_date": "2019-11-08"
-},
-{
-    "game_id": "2",
-    "Developers_developer_id": 2,
-    "game_name": "Counter Strike: Global Offensive",
-    "release_date": "2012-08-21"
-},
-{
-    "game_id": "3",
-    "Developers_developer_id": 3,
-    "game_name": "Monster Hunter: World",
-    "release_date": "2018-08-09"
-},
-{
-    "game_id": "4",
-    "Developers_developer_id": 3,
-    "game_name": "Devil May Cry V",
-    "release_date": "2019-03-08"
-},
-{
-    "game_id": "5",
-    "Developers_developer_id": 4,
-    "game_name": "Death Stranding",
-    "release_date": "2019-11-08"
-},
-]
-
-Developers = [
-{
-    "developer_id": "1",
-    "developer_name": "Ghost Games"
-},
-{
-    "developer_id": "2",
-    "developer_name": "Valve"
-},
-{
-    "developer_id": "3",
-    "developer_name": "CAPCOM"
-},
-{
-    "developer_id": "4",
-    "developer_name": "Kojima Production"
-}
-]
-
-Reviews = [
-{
-    "review_id": "1",
-    "Games_games_id": "1",
-    "Reviewers_reviewer_id": "1",
-    "review_date": "2020-10-14",
-    "rating": "6",
-    "review_content": "This game is gas"
-},
-{
-    "review_id": "2",
-    "Games_games_id": "2",
-    "Reviewers_reviewer_id": "1",
-    "review_date": "2017-12-11",
-    "rating": "7",
-    "review_content": "This game is pretty good, but the matchmaking is terrible"
-},
-{
-    "review_id": "3",
-    "Games_games_id": "3",
-    "Reviewers_reviewer_id": "2",
-    "review_date": "2019-08-19",
-    "rating": "9",
-    "review_content": "The music and gameplay is awesome, classic Monster Hunter gameplay"
-},
-{
-    "review_id": "4",
-    "Games_games_id": "3",
-    "Reviewers_reviewer_id": "3",
-    "review_date": "2019-10-25",
-    "rating": "8",
-    "review_content": "Excellent entry of Monster Hunter"
-},
-{
-    "review_id": "5",
-    "Games_games_id": "1",
-    "Reviewers_reviewer_id": "3",
-    "review_date": "2019-10-25",
-    "rating": "8",
-    "review_content": "Smokin Sexy Style! The action for the long awaited sequel was worth the wait!"
-},
-{
-    "review_id": "6",
-    "Games_games_id": "5",
-    "Reviewers_reviewer_id": "2",
-    "review_date": "2017-12-11",
-    "rating": "7",
-    "review_content": "Very interesting game by Hideo Kojima"
-},
-
-]
-
-Reviewers =[
-{
-    "reviewer_id": "1",
-    "reviewer_name": "Gamecritic",
-    "number_of_review": 2
-},
-{
-    "reviewer_id": "2",
-    "reviewer_name": "IGN",
-    "number_of_review": 2
-},
-{
-    "reviewer_id": "3",
-    "reviewer_name": "Gamespot",
-    "number_of_review": 2
-}
-]
-
-GameGenres = [
-{
-    "Games_game_id" : "1",
-    "Genres_genre_id" : "1"
-},
-{
-    "Games_game_id" : "2",
-    "Genres_genre_id" : "2"
-},
-{
-    "Games_game_id" : "2",
-    "Genres_genre_id" : "3"
-},
-{
-    "Games_game_id" : "3",
-    "Genres_genre_id" : "4"
-},
-{
-    "Games_game_id" : "4",
-    "Genres_genre_id" : "4"
-},
-{
-    "Games_game_id" : "4",
-    "Genres_genre_id" : "5"
-},
-{
-    "Games_game_id" : "5",
-    "Genres_genre_id" : "4"
-},
-{
-    "Games_game_id" : "5",
-    "Genres_genre_id" : "6"
-},
-]
-
-Genres = [
-{
-    "genre_id": "1",
-    "game_genre": "Racing"
-},
-{
-    "genre_id": "2",
-    "game_genre": "FPS"
-},
-{
-    "genre_id": "3",
-    "game_genre": "Shooter"
-},
-{
-    "genre_id": "4",
-    "game_genre": "Adventure"
-},
-{
-    "genre_id": "5",
-    "game_genre": "Hack-And-Slash"
-},
-{
-    "genre_id": "6",
-    "game_genre": "Action"
-},
-]
-
 @app.route('/')
 def root():
     return render_template("index.html")
 
 @app.route('/games')
 def gamePage():
+    gameQuery = "SELECT * FROM Games"
+    gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
+    Games = gameCursor.fetchall()
+
+    devQuery = "SELECT * FROM Developers"
+    devCursor = db.execute_query(db_connection=db_connection, query = devQuery)
+    Developers = devCursor.fetchall()
+
     return render_template("games.html", games = Games, developers = Developers)
 
 @app.route('/developers')
 def developerPage():
+    devQuery = "SELECT * FROM Developers"
+    devCursor = db.execute_query(db_connection=db_connection, query = devQuery)
+    Developers = devCursor.fetchall()
     return render_template("developers.html", developers = Developers)
 
 @app.route('/genres')
 def genrePage():
+    genreQuery = "SELECT * FROM Genres"
+    genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
+    Genres = genreCursor.fetchall()
     return render_template("genres.html", genres = Genres)
 
 @app.route('/reviewers')
 def reviewerPage():
+    reviewerQuery = "SELECT * FROM Reviewers"
+    reviewerCursor = db.execute_query(db_connection=db_connection, query = reviewerQuery)
+    Reviewers = reviewerCursor.fetchall()
+
     return render_template("reviewers.html", reviewers = Reviewers)
 
 @app.route('/reviews')
 def reviewsPage():
+    gameQuery = "SELECT * FROM Games"
+    gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
+    Games = gameCursor.fetchall()
+
+    reviewerQuery = "SELECT * FROM Reviewers"
+    reviewerCursor = db.execute_query(db_connection=db_connection, query = reviewerQuery)
+    Reviewers = reviewerCursor.fetchall()
+
+    reviewQuery = "SELECT * FROM Reviews"
+    reviewCursor = db.execute_query(db_connection=db_connection, query = reviewQuery)
+    Reviews = reviewCursor.fetchall()
     return render_template("reviews.html", reviews = Reviews, games = Games, reviewers = Reviewers)
 
 @app.route('/gameGenres')
 def gameGenres():
+    gameGenreQuery = "SELECT * FROM GameGenres"
+    gameGenreCursor = db.execute_query(db_connection=db_connection, query = gameGenreQuery)
+    GameGenres = gameGenreCursor.fetchall()
+
+    gameQuery = "SELECT * FROM Games"
+    gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
+    Games = gameCursor.fetchall()
+
+    genreQuery = "SELECT * FROM Genres"
+    genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
+    Genres = genreCursor.fetchall()
+
     return render_template("gameGenres.html", gameGenres = GameGenres, games = Games, genres = Genres)
 
 @app.route('/about')
 def about():
     return render_template("about.html")
-# Listener
 
+@app.route('/test')
+def testPage():
+    query = "SELECT * FROM Games"
+    cursor = db.execute_query(db_connection=db_connection, query = query)
+    results = json.dumps(cursor.fetchall())
+    return results
+
+# Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59129)) 
+    port = int(os.environ.get('PORT', 59123)) 
     
     app.run(port=port, debug = True) 
