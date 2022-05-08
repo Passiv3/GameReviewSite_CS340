@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 05, 2022 at 05:15 AM
+-- Generation Time: May 08, 2022 at 11:08 PM
 -- Server version: 10.6.7-MariaDB-log
 -- PHP Version: 7.4.28
 
@@ -20,8 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cs340_chundann`
 --
-CREATE DATABASE IF NOT EXISTS `cs340_chundann` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
-USE `cs340_chundann`;
 
 -- --------------------------------------------------------
 
@@ -39,10 +37,11 @@ CREATE TABLE `Developers` (
 --
 
 INSERT INTO `Developers` (`developer_id`, `developer_name`) VALUES
-(3, 'CAPCOM'),
 (1, 'Ghost Games'),
-(4, 'Kojima Production'),
-(2, 'Valve');
+(2, 'Valve'),
+(3, 'CAPCOM'),
+(4, 'Kojima Production')
+;
 
 -- --------------------------------------------------------
 
@@ -51,15 +50,15 @@ INSERT INTO `Developers` (`developer_id`, `developer_name`) VALUES
 --
 
 CREATE TABLE `GameGenres` (
-  `Games_game_id` int(11) NOT NULL,
-  `Genres_genres_id` int(11) NOT NULL
+  `game_id` int(11) NOT NULL,
+  `genre_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `GameGenres`
 --
 
-INSERT INTO `GameGenres` (`Games_game_id`, `Genres_genres_id`) VALUES
+INSERT INTO `GameGenres` (`game_id`, `genre_id`) VALUES
 (1, 1),
 (2, 2),
 (2, 3),
@@ -77,7 +76,7 @@ INSERT INTO `GameGenres` (`Games_game_id`, `Genres_genres_id`) VALUES
 
 CREATE TABLE `Games` (
   `game_id` int(11) NOT NULL,
-  `Developers_developer_id` int(11) NOT NULL,
+  `developer_id` int(11) DEFAULT NULL,
   `game_name` varchar(45) NOT NULL,
   `release_date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -86,11 +85,11 @@ CREATE TABLE `Games` (
 -- Dumping data for table `Games`
 --
 
-INSERT INTO `Games` (`game_id`, `Developers_developer_id`, `game_name`, `release_date`) VALUES
+INSERT INTO `Games` (`game_id`, `developer_id`, `game_name`, `release_date`) VALUES
 (1, 1, 'Need for Speed Heat', '2019-11-08'),
-(2, 2, 'Counter Strike: Global Offensive', '2012-08-21'),
-(3, 3, 'Monster Hunter: World', '2018-08-09'),
-(4, 3, 'Devil May Cry V', '2019-03-08'),
+(2, 2, 'Counter Strike: Global Offensive', '2019-11-08'),
+(3, 3, 'Monster Hunter: World', '2018-09-08'),
+(4, 3, 'Devil May Cry V', '2018-09-08'),
 (5, 4, 'Death Stranding', '2019-11-08');
 
 -- --------------------------------------------------------
@@ -145,18 +144,18 @@ INSERT INTO `Reviewers` (`reviewer_id`, `reviewer_name`, `number_of_review`) VAL
 
 CREATE TABLE `Reviews` (
   `review_id` int(11) NOT NULL,
-  `Games_game_id` int(11) NOT NULL,
-  `Reviewers_reviewer_id` int(11) NOT NULL,
+  `game_id` int(11) NOT NULL,
+  `reviewer_id` int(11) NOT NULL,
   `review_date` date NOT NULL,
   `rating` int(11) NOT NULL,
-  `review_content` longtext DEFAULT NULL
+  `review_content` longtext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Dumping data for table `Reviews`
 --
 
-INSERT INTO `Reviews` (`review_id`, `Games_game_id`, `Reviewers_reviewer_id`, `review_date`, `rating`, `review_content`) VALUES
+INSERT INTO `Reviews` (`review_id`, `game_id`, `reviewer_id`, `review_date`, `rating`, `review_content`) VALUES
 (1, 1, 1, '2020-10-14', 6, 'This game is gas'),
 (2, 2, 1, '2017-12-11', 7, 'This game is pretty good, but the matchmaking is terrible'),
 (3, 3, 2, '2019-08-19', 9, 'The music and gameplay is awesome, classic Monster Hunter gameplay'),
@@ -179,15 +178,15 @@ ALTER TABLE `Developers`
 -- Indexes for table `GameGenres`
 --
 ALTER TABLE `GameGenres`
-  ADD PRIMARY KEY (`Games_game_id`,`Genres_genres_id`),
-  ADD KEY `fk_GameGenres_Genres1_idx` (`Genres_genres_id`);
+  ADD PRIMARY KEY (`game_id`,`genre_id`),
+  ADD KEY `fk_GameGenres_Genres1_idx` (`genre_id`);
 
 --
 -- Indexes for table `Games`
 --
 ALTER TABLE `Games`
   ADD PRIMARY KEY (`game_id`),
-  ADD KEY `fk_Games_Developers_idx` (`Developers_developer_id`);
+  ADD KEY `fk_Games_Developers_idx` (`developer_id`);
 
 --
 -- Indexes for table `Genres`
@@ -206,8 +205,8 @@ ALTER TABLE `Reviewers`
 --
 ALTER TABLE `Reviews`
   ADD PRIMARY KEY (`review_id`),
-  ADD KEY `fk_Reviews_Reviewers1_idx` (`Reviewers_reviewer_id`),
-  ADD KEY `fk_Reviews_Games1` (`Games_game_id`);
+  ADD KEY `fk_Reviews_Reviewers1_idx` (`reviewer_id`),
+  ADD KEY `fk_Reviews_Games1` (`game_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -251,21 +250,21 @@ ALTER TABLE `Reviews`
 -- Constraints for table `GameGenres`
 --
 ALTER TABLE `GameGenres`
-  ADD CONSTRAINT `fk_GameGenres_Games1` FOREIGN KEY (`Games_game_id`) REFERENCES `Games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_GameGenres_Genres1` FOREIGN KEY (`Genres_genres_id`) REFERENCES `Genres` (`genre_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_GameGenres_Games1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_GameGenres_Genres1` FOREIGN KEY (`genre_id`) REFERENCES `Genres` (`genre_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Games`
 --
 ALTER TABLE `Games`
-  ADD CONSTRAINT `fk_Games_Developers` FOREIGN KEY (`Developers_developer_id`) REFERENCES `Developers` (`developer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Games_Developers` FOREIGN KEY (`developer_id`) REFERENCES `Developers` (`developer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `Reviews`
 --
 ALTER TABLE `Reviews`
-  ADD CONSTRAINT `fk_Reviews_Games1` FOREIGN KEY (`Games_game_id`) REFERENCES `Games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_Reviews_Reviewers1` FOREIGN KEY (`Reviewers_reviewer_id`) REFERENCES `Reviewers` (`reviewer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_Reviews_Games1` FOREIGN KEY (`game_id`) REFERENCES `Games` (`game_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_Reviews_Reviewers1` FOREIGN KEY (`reviewer_id`) REFERENCES `Reviewers` (`reviewer_id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
