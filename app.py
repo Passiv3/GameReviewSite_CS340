@@ -92,12 +92,9 @@ def gameGenres():
 def about():
     return render_template("about.html")
 
-@app.route('/test')
-def testPage():
-    query = "SELECT * FROM Games"
-    cursor = db.execute_query(db_connection=db_connection, query = query)
-    results = json.dumps(cursor.fetchall())
-    return results
+@app.route('/search')
+def search():
+    return render_template("search.html")
 
 # Listener
 if __name__ == "__main__":
