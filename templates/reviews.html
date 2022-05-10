@@ -18,6 +18,7 @@
               <li><a href = "reviews">Reviews</a></li>
               <li><a href = "genres">Genres</a></li>
               <li><a href = "gameGenres">GameGenreRelationships</a></li>
+              <li><a href = "search">Search Page</a></li>
               <li><a href = "about">About</a></li>
             </ul>
           </nav>
@@ -102,13 +103,13 @@
             {% for item in reviews %}
             <tr>
                 <td>{{item['review_id']}}</td>
-                <td>{{item['Games_games_id']}}</td>
-                <td>{{item['Reviewers_reviewer_id']}}</td>
+                <td>{{item['game_id']}}</td>
+                <td>{{item['reviewer_id']}}</td>
                 <td>{{item['review_date']}}</td>
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
                 <td><button><i class="material-icons">edit</i></button></td>
-                <td><button><i class = "material-icons">delete</i></td></button>
+                <td><button onclick ="alert('Are you sure you want to delete?')"><i class = "material-icons">delete</i></td></button>
             </tr>
             {% endfor %}
         </tbody>

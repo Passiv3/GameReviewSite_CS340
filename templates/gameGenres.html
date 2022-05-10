@@ -17,6 +17,7 @@
         <li><a href = "reviews">Reviews</a></li>
         <li><a href = "genres">Genres</a></li>
         <li><a href = "gameGenres">GameGenreRelationships</a></li>
+        <li><a href = "search">Search Page</a></li>
         <li><a href = "about">About</a></li>
       </ul>
     </nav>
@@ -65,8 +66,8 @@
       <tbody>
       {% for item in gameGenres %}
         <tr>
-          <td>{{item['Games_game_id']}}</td>
-          <td>{{item['Genres_genre_id']}}</td>
+          <td>{{item['game_id']}}</td>
+          <td>{{item['genre_id']}}</td>
         </tr>
       {% endfor %}
       </tbody> 
