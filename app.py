@@ -94,6 +94,7 @@ def about():
 
 @app.route('/search')
 def search():
+    searchquery = "SELECT Reviews.review_id, Genres.game_genre, Games.game_name FROM Reviews INNER JOIN GameGenres ON Reviews.game_id = GameGenres.game_id INNER JOIN Genres ON GameGenres.genre_id = Genres.genre_id INNER JOIN Games ON Reviews.game_id = Games.game_id"
     return render_template("search.html")
 
 # Listener
