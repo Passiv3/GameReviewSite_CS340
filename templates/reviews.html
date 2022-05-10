@@ -108,8 +108,8 @@
                 <td>{{item['review_date']}}</td>
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
-                <td><button><i class="material-icons">edit</i></button></td>
-                <td><button onclick ="alert('Are you sure you want to delete?')"><i class = "material-icons">delete</i></td></button>
+                <td><a href = "delrev/{{item['review_id']}}">delete</a>
+                <td><a href = "editrev/{{item['review_id']}}">edit</a>
             </tr>
             {% endfor %}
         </tbody>

@@ -57,6 +57,16 @@ def reviewerPage():
 
     return render_template("reviewers.html", reviewers = Reviewers)
 
+@app.route('/delrev/<int:id>')
+def deletePage():
+    query = "DELETE FROM review WHERE id = '%s'"
+
+    return render_template("delete.html")
+
+@app.route('/editrev/<int:id>')
+def editPage():
+    return render_template("edit.html")
+
 @app.route('/reviews')
 def reviewsPage():
     gameQuery = "SELECT * FROM Games"
@@ -94,11 +104,12 @@ def about():
 
 @app.route('/search')
 def search():
+    
     return render_template("search.html")
 
 # Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59123)) 
+    port = int(os.environ.get('PORT', 59129)) 
     
     app.run(port=port, debug = True) 
