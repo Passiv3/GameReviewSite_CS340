@@ -31,7 +31,7 @@ def gamePage():
     gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
     Games = gameCursor.fetchall()
 
-    devQuery = "SELECT * FROM Developers"
+    devQuery = "SELECT developer_name FROM Developers"
     devCursor = db.execute_query(db_connection=db_connection, query = devQuery)
     Developers = devCursor.fetchall()
 
@@ -64,13 +64,18 @@ def reviewerPage():
 
 @app.route('/delrev/<int:id>')
 def deletePage(id):
-    query = "DELETE FROM review WHERE id = '%s'"
+    # Goes somemwhere else, probably at top of reviews page
+    query = "DELETE FROM review WHERE id = %s" %(id)
 
     return render_template("delete.html")
 
 @app.route('/editrev/<int:id>')
 def editPage(id):
-    return render_template("edit.html")
+    db_connection = db.connect_to_database()
+    query = "SELECT * FROM Reviews WHERE review_id = %s" %(id)
+    cursor = db.execute_query(db_connection=db_connection, query = query)
+    nowEditing = cursor.fetchall()
+    return render_template("edit.html", edit = nowEditing)
 
 @app.route('/reviews')
 def reviewsPage():
@@ -111,7 +116,9 @@ def about():
 
 @app.route('/search')
 def search():
-    searchquery = "SELECT Reviews.review_id, Genres.game_genre, Games.game_name FROM Reviews INNER JOIN GameGenres ON Reviews.game_id = GameGenres.game_id INNER JOIN Genres ON GameGenres.genre_id = Genres.genre_id INNER JOIN Games ON Reviews.game_id = Games.game_id"
+    searchquery = """SELECT Reviews.review_id, Genres.game_genre, Games.game_name 
+                    FROM Reviews 
+                    INNER JOIN GameGenres ON Reviews.game_id = GameGenres.game_id INNER JOIN Genres ON GameGenres.genre_id = Genres.genre_id INNER JOIN Games ON Reviews.game_id = Games.game_id"""
     return render_template("search.html")
 
 # Listener

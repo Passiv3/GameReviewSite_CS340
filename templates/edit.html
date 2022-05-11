@@ -23,4 +23,56 @@
             </ul>
           </nav>
     </header>
+
+    <!-- Citation for the following:
+    Date: 05/04/2022
+    Adapted from:
+    Source URL: https://replit.com/@coecs290/m351#index.html
+    Body consists of a form, fieldset.
+    -->
+    <!--Creates Table for values-->
+    <form>
+      <!-- The fieldset element is used to group several controls and labels within a web form.-->
+      <fieldset>
+        {% for item in edit %}
+          <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
+          <legend>Edit Review:</legend>
+          <label>Review_id:
+            <input type = "text" readonly value = {{item.review_id}}>
+          </label>
+          <br />
+          <label>Reviewer:
+            <input type = "text" readonly value = {{item.reviewer_id}}>
+          </label>
+          <br />
+          <label>Edit your thoughts:
+              <textarea name="review_content" maxlength="500" required = "required"></textarea>
+          </label>
+          <br />
+          <label>Review date:
+              <input type="date" name="review_date" size="30" maxlength="100" required = "required">
+          </label>
+          <br />
+        {% endfor %}
+          <label>Out of 10?:
+              <select name = "rating">
+                  <option value = "1">1</option>
+                  <option value = "2">2</option>
+                  <option value = "3">3</option>
+                  <option value = "4">4</option>
+                  <option value = "5">5</option>
+                  <option value = "6">6</option>
+                  <option value = "7">7</option>
+                  <option value = "8">8</option>
+                  <option value = "9">9</option>
+                  <option value = "10">10</option>
+              </select>
+          </label>
+          <br><br>
+          <button type="submit">Submit Changes</button>
+      </fieldset>
+      <br />
+      <!-- We can use the button element or the input element to display the button -->
+      <!--input type="submit" value="Submit review" /-->
+  </form>
 </body>
