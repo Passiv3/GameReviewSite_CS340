@@ -21,10 +21,12 @@ mysql = MySQL(app)
 # Routes 
 @app.route('/')
 def root():
+    db_connection = db.connect_to_database()
     return render_template("index.html")
 
 @app.route('/games')
 def gamePage():
+    db_connection = db.connect_to_database()
     gameQuery = "SELECT * FROM Games"
     gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
     Games = gameCursor.fetchall()
@@ -37,6 +39,7 @@ def gamePage():
 
 @app.route('/developers')
 def developerPage():
+    db_connection = db.connect_to_database()
     devQuery = "SELECT * FROM Developers"
     devCursor = db.execute_query(db_connection=db_connection, query = devQuery)
     Developers = devCursor.fetchall()
@@ -44,6 +47,7 @@ def developerPage():
 
 @app.route('/genres')
 def genrePage():
+    db_connection = db.connect_to_database()
     genreQuery = "SELECT * FROM Genres"
     genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
     Genres = genreCursor.fetchall()
@@ -51,6 +55,7 @@ def genrePage():
 
 @app.route('/reviewers')
 def reviewerPage():
+    db_connection = db.connect_to_database()
     reviewerQuery = "SELECT * FROM Reviewers"
     reviewerCursor = db.execute_query(db_connection=db_connection, query = reviewerQuery)
     Reviewers = reviewerCursor.fetchall()
@@ -58,17 +63,18 @@ def reviewerPage():
     return render_template("reviewers.html", reviewers = Reviewers)
 
 @app.route('/delrev/<int:id>')
-def deletePage():
+def deletePage(id):
     query = "DELETE FROM review WHERE id = '%s'"
 
     return render_template("delete.html")
 
 @app.route('/editrev/<int:id>')
-def editPage():
+def editPage(id):
     return render_template("edit.html")
 
 @app.route('/reviews')
 def reviewsPage():
+    db_connection = db.connect_to_database()
     gameQuery = "SELECT * FROM Games"
     gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
     Games = gameCursor.fetchall()
@@ -84,6 +90,7 @@ def reviewsPage():
 
 @app.route('/gameGenres')
 def gameGenres():
+    db_connection = db.connect_to_database()
     gameGenreQuery = "SELECT * FROM GameGenres"
     gameGenreCursor = db.execute_query(db_connection=db_connection, query = gameGenreQuery)
     GameGenres = gameGenreCursor.fetchall()
@@ -110,6 +117,6 @@ def search():
 # Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59129)) 
+    port = int(os.environ.get('PORT', 59123)) 
     
     app.run(port=port, debug = True) 
