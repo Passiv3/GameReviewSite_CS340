@@ -108,8 +108,9 @@
                 <td>{{item['review_date']}}</td>
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
-                <td><a href = "delrev/{{item['review_id']}}">delete</a>
-                <td><a href = "editrev/{{item['review_id']}}">edit</a>
+                <td><a href = "editrev/{{item['review_id']}}">edit
+                <td><a href = "delrev/{{item['review_id']}}">delete</a>    
+                </a>
             </tr>
             {% endfor %}
         </tbody>
