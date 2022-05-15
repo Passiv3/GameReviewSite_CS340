@@ -3,7 +3,6 @@
     <meta charset="utf-8">
     <title>TeamDB - Reviews</title>
     <link rel="stylesheet" type=text/css href="{{ url_for('static', filename='style.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 
 <body>
@@ -109,7 +108,7 @@
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
                 <td><a href = "editrev/{{item['review_id']}}">edit
-                <td><a href = "delrev/{{item['review_id']}}">delete</a>    
+                <td><a href = "delrev/{{item['review_id']}}" onClick = "return confirm ('Are you sure?')">delete</a>    
                 </a>
             </tr>
             {% endfor %}

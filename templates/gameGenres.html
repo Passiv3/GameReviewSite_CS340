@@ -29,18 +29,19 @@
   Source URL: https://replit.com/@coecs290/m351
   Dropdown menus adapted from this code
   -->
-  <form action>
+  <form method = "post">
     <fieldset>
+      <legend>Add a genre to a game</legend>
         <label for="GameName">Select game:</label>
-        <select name="GameName" id="GameName">
+        <select name="game_id" id="GameName">
           {% for item in games %}
           <option value={{item.game_id}}>{{item.game_name}}</option>
           {% endfor %}
         </select>
         <br><br>
 
-        <label for="GenreName">Remove Genre from Game:</label>
-        <select name="GenreName" id="GenreName">
+        <label for="GenreName">Add Genre to Game:</label>
+        <select name="genre_id" id="GenreName">
           {% for item in genres %}
           <option value={{item.genre_id}}>{{item.game_genre}}</option>
           {% endfor %}
@@ -59,15 +60,15 @@
   <table>
       <thead>
         <tr>
-          <th>Game ID</th>
-          <th>Genre ID</th>
+          <th>Game Name</th>
+          <th>Genre</th>
         </tr>
       </thead>
       <tbody>
       {% for item in gameGenres %}
         <tr>
-          <td>{{item['game_id']}}</td>
-          <td>{{item['genre_id']}}</td>
+          <td>{{item['game_name']}}</td>
+          <td>{{item['game_genre']}}</td>
         </tr>
       {% endfor %}
       </tbody> 
