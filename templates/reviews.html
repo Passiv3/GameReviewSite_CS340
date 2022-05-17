@@ -17,7 +17,6 @@
               <li><a href = "reviews">Reviews</a></li>
               <li><a href = "genres">Genres</a></li>
               <li><a href = "gameGenres">GameGenreRelationships</a></li>
-              <li><a href = "search">Search Page</a></li>
               <li><a href = "about">About</a></li>
             </ul>
           </nav>
@@ -29,13 +28,13 @@
     Body consists of a form, fieldset.
     -->
     <!--Creates Table for values-->
-    <form>
+    <form method = "post">
         <!-- The fieldset element is used to group several controls and labels within a web form.-->
         <fieldset>
             <!-- The legend element is used to add a caption for the content of its parent fieldset.-->
             <legend>Add New Entry:</legend>
             <label>Game:
-                <select name = "gameName">
+                <select name = "gameID">
                     {% for item in games %}
                     <option value = {{item.game_id}}>{{item.game_name}}</option>
                     {% endfor %}
@@ -43,7 +42,7 @@
             </label>
             <br />
             <label>Reviewer:
-                <select name = "reviewerName">
+                <select name = "reviewerID">
                     {% for item in reviewers %}
                     <option value = {{item.reviewer_id}}>{{item.reviewer_name}}</option>
                     {% endfor %}
@@ -73,11 +72,22 @@
                 </select>
             </label>
             <br><br>
-            <button type="submit">Submit Review</button>
+            <input type="submit" value = "Submit Review" name = "add_review" class ="btn btn-primary"></button>
         </fieldset>
         <br />
         <!-- We can use the button element or the input element to display the button -->
         <!--input type="submit" value="Submit review" /-->
+    </form>
+    <form id ="filter" method = "post">
+        <fieldset>
+            <legend>Filter Reviews by Game Genre</legend>
+            <select name = "genre">
+                {% for item in genres %}
+                <option value = {{item.genre_id}}>{{item.game_genre}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value = "Filter" name = "apply_filter" class ="btn btn-primary"></button>
+        </fieldset>
     </form>
     <!-- Citation for the following:
     Date: 05/04/2022
@@ -89,8 +99,8 @@
         <thead>
             <tr>
                 <th>Review ID</th>
-                <th>Game ID</th>
-                <th>Reviewer ID</th>
+                <th>Game Name</th>
+                <th>Reviewer Name</th>
                 <th>Date Review Published</th>
                 <th>Rating</th>
                 <th>Review Content</th>
@@ -102,8 +112,8 @@
             {% for item in reviews %}
             <tr>
                 <td>{{item['review_id']}}</td>
-                <td>{{item['game_id']}}</td>
-                <td>{{item['reviewer_id']}}</td>
+                <td>{{item['game_name']}}</td>
+                <td>{{item['reviewer_name']}}</td>
                 <td>{{item['review_date']}}</td>
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
