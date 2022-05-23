@@ -86,7 +86,8 @@
                 <option value = {{item.genre_id}}>{{item.game_genre}}</option>
                 {% endfor %}
             </select>
-            <input type="submit" value = "Filter" name = "apply_filter" class ="btn btn-primary"></button>
+            <input type="submit" value = "Filter" name = "apply_filter">
+            <input type="submit" value = "Clear Filter" name = "clear_filter">
         </fieldset>
     </form>
     <!-- Citation for the following:
@@ -118,7 +119,7 @@
                 <td>{{item['rating']}}</td>
                 <td>{{item['review_content']}}</td>
                 <td><a href = "editrev/{{item['review_id']}}">edit
-                <td><a href = "delrev/{{item['review_id']}}" onClick = "return confirm ('Are you sure?')">delete</a>    
+                <td><a href = "delete/review/{{item['review_id']}}/{{item['reviewer_id']}}" onClick = "return confirm ('Are you sure?')">delete</a>    
                 </a>
             </tr>
             {% endfor %}

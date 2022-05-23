@@ -98,11 +98,21 @@ def reviewerPage():
 
     return render_template("reviewers.html", reviewers = Reviewers)
 
-@app.route('/delrev/<int:id>')
-def deletePage(id):
+@app.route('/delete/<location>/<int:id1>')
+@app.route('/delete/<location>/<int:id1>/<int:id2>', methods = ["POST", "GET"])
+def deletePage(location, id1, id2 = None):
     db_connection = db.connect_to_database()
-    query = "DELETE FROM Reviews WHERE review_id = '%s';" %(id)
-    cur = db.execute_query(db_connection = db_connection, query = query)
+    if request.method == "GET":
+        if location == "review":
+            query = "DELETE FROM Reviews WHERE review_id = '%s';" %(id1)
+            updateQuery = """UPDATE Reviewers
+                            SET number_of_review = number_of_review - 1
+                            WHERE reviewer_id = ('%s');"""%(id2)
+            cur = db.execute_query(db_connection = db_connection, query = query)
+            cur = db.execute_query(db_connection = db_connection, query = updateQuery)
+        elif location == "genre":
+            query = "DELETE FROM GameGenres WHERE game_id = '%s' and genre_id = '%s';" %(id1, id2)
+            cur = db.execute_query(db_connection = db_connection, query = query)
     
     return render_template("delete.html")
 
@@ -110,16 +120,24 @@ def deletePage(id):
 def editPage(id):
     db_connection = db.connect_to_database()
     if request.method == "GET":
-        query = "SELECT * FROM Reviews WHERE review_id = %s" %(id)
+        query = """SELECT review_id, game_name, reviewer_name, review_date, rating, review_content
+                   FROM Reviews 
+                   JOIN Games ON Reviews.game_id = Games.game_id
+                   JOIN Reviewers ON Reviews.reviewer_id = Reviewers.reviewer_id
+                   WHERE review_id = %s;""" %(id)
         cursor = db.execute_query(db_connection=db_connection, query = query)
         nowEditing = cursor.fetchall()
+        return render_template("edit.html", edit = nowEditing)
 
     if request.method == "POST":
+        if request.form.get("cancel"):
+            return redirect("/reviews")
         newRating = request.form["rating"]
         newContent = request.form["review_content"]
         newDate = request.form["review_date"]
         query = "UPDATE Reviews SET review_date = '%s', rating = '%s', review_content = '%s' WHERE review_id = '%s'" %(newDate, newRating, newContent, id)
         cur = db.execute_query(db_connection = db_connection, query = query)
+
         return redirect("/reviews")
 
     return render_template("edit.html", edit = nowEditing)
@@ -136,19 +154,21 @@ def reviewsPage():
         reviewerCursor = db.execute_query(db_connection=db_connection, query = reviewerQuery)
         Reviewers = reviewerCursor.fetchall()
 
-        genreQuery = "SELECT * FROM Genres"
+        genreQuery = "SELECT * FROM Genres ORDER BY game_genre ASC"
         genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
         Genres = genreCursor.fetchall()
 
-        reviewQuery = """SELECT review_id, game_name, reviewer_name, review_date, rating, review_content
+        reviewQuery = """SELECT review_id, game_name, reviewer_name, review_date, rating, review_content, Reviews.reviewer_id
                         FROM Reviews
                         JOIN Games on Games.game_id = Reviews.game_id
-                        JOIN Reviewers on Reviewers.reviewer_id = Reviews.reviewer_id;"""
+                        JOIN Reviewers on Reviewers.reviewer_id = Reviews.reviewer_id
+                        ORDER BY review_id ASC;"""
         reviewCursor = db.execute_query(db_connection=db_connection, query = reviewQuery)
         Reviews = reviewCursor.fetchall()
         return render_template("reviews.html", reviews = Reviews, games = Games, reviewers = Reviewers, genres = Genres)
 
     if request.method == "POST":
+        # Adds review
         if request.form.get("add_review"):
             game_id = request.form["gameID"]
             reviewer_id = request.form["reviewerID"]
@@ -157,10 +177,17 @@ def reviewsPage():
             rating = request.form["rating"]
 
             query = """INSERT INTO Reviews (game_id, reviewer_id, review_date, rating, review_content)
-                        VALUES ('%s','%s','%s','%s','%s')""" %(game_id, reviewer_id, date, rating, contents)
+                        VALUES ('%s','%s','%s','%s','%s');""" %(game_id, reviewer_id, date, rating, contents)
+            updateQuery = """UPDATE Reviewers
+                            SET number_of_review = number_of_review + 1
+                            WHERE reviewer_id = ('%s');"""%(reviewer_id)                    
             cur = db.execute_query(db_connection = db_connection, query = query)
+            cur = db.execute_query(db_connection = db_connection, query = updateQuery)
             return redirect("/reviews")
-        
+        # Clears filters
+        if request.form.get("clear_filter"):
+            return redirect("/reviews")
+        # Applies filters
         if request.form.get("apply_filter"):
             genre_id = request.form["genre"]
             gameQuery = "SELECT * FROM Games"
@@ -171,7 +198,7 @@ def reviewsPage():
             reviewerCursor = db.execute_query(db_connection=db_connection, query = reviewerQuery)
             Reviewers = reviewerCursor.fetchall()
 
-            genreQuery = "SELECT * FROM Genres"
+            genreQuery = "SELECT * FROM Genres ORDER BY game_genre ASC"
             genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
             Genres = genreCursor.fetchall()
 
@@ -198,17 +225,17 @@ def gameGenres():
         gameGenreCursor = db.execute_query(db_connection=db_connection, query = gameGenreQuery)
         GameGenres = gameGenreCursor.fetchall()
 
-        gameQuery = "SELECT game_id, game_name FROM Games"
+        gameQuery = "SELECT game_id, game_name FROM Games ORDER BY game_name asc"
         gameCursor = db.execute_query(db_connection=db_connection, query = gameQuery)
         Games = gameCursor.fetchall()
 
-        genreQuery = "SELECT * FROM Genres"
+        genreQuery = "SELECT * FROM Genres ORDER BY game_genre asc"
         genreCursor = db.execute_query(db_connection=db_connection, query = genreQuery)
         Genres = genreCursor.fetchall()
     
     if request.method == "POST":
-        gameID = request.form["GameName"]
-        genreID = request.form["GenreName"]
+        gameID = request.form["game_id"]
+        genreID = request.form["genre_id"]
         query = "INSERT INTO GameGenres (game_id, genre_id) VALUES ('%s', '%s')" %(gameID, genreID)
         cur = db.execute_query(db_connection = db_connection, query = query)
         return redirect("/gameGenres")
@@ -222,6 +249,6 @@ def about():
 # Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59123)) 
+    port = int(os.environ.get('PORT', 59129)) 
     
     app.run(port=port, debug = True) 

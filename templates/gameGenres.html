@@ -61,6 +61,7 @@
         <tr>
           <th>Game Name</th>
           <th>Genre</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -68,9 +69,10 @@
         <tr>
           <td>{{item['game_name']}}</td>
           <td>{{item['game_genre']}}</td>
+          <td><a href = "delete/genre/{{item['game_id']}}/{{item['genre_id']}}" onClick = "return confirm ('Are you sure?')">delete</a> </td>
         </tr>
       {% endfor %}
-      </tbody> 
+      </tbody>
   </table>
 </body>
 
