@@ -160,8 +160,8 @@ def reviewsPage():
 
         reviewQuery = """SELECT review_id, game_name, reviewer_name, review_date, rating, review_content, Reviews.reviewer_id
                         FROM Reviews
-                        JOIN Games on Games.game_id = Reviews.game_id
-                        JOIN Reviewers on Reviewers.reviewer_id = Reviews.reviewer_id
+                        LEFT JOIN Games on Games.game_id = Reviews.game_id
+                        LEFT JOIN Reviewers on Reviewers.reviewer_id = Reviews.reviewer_id
                         ORDER BY review_id ASC;"""
         reviewCursor = db.execute_query(db_connection=db_connection, query = reviewQuery)
         Reviews = reviewCursor.fetchall()
@@ -176,8 +176,12 @@ def reviewsPage():
             date = request.form["review_date"]
             rating = request.form["rating"]
 
-            query = """INSERT INTO Reviews (game_id, reviewer_id, review_date, rating, review_content)
-                        VALUES ('%s','%s','%s','%s','%s');""" %(game_id, reviewer_id, date, rating, contents)
+            if (reviewer_id == ""):
+                query = """INSERT INTO Reviews (game_id, review_date, rating, review_content)
+                        VALUES ('%s','%s','%s','%s');""" %(game_id, date, rating, contents)
+            else:
+                query = """INSERT INTO Reviews (game_id, reviewer_id, review_date, rating, review_content)
+                            VALUES ('%s','%s','%s','%s','%s');""" %(game_id, reviewer_id, date, rating, contents)
             updateQuery = """UPDATE Reviewers
                             SET number_of_review = number_of_review + 1
                             WHERE reviewer_id = ('%s');"""%(reviewer_id)                    
@@ -249,6 +253,6 @@ def about():
 # Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59129)) 
+    port = int(os.environ.get('PORT', 59123)) 
     
     app.run(port=port, debug = True) 

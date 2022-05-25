@@ -43,6 +43,7 @@
             <br />
             <label>Reviewer:
                 <select name = "reviewerID">
+                    <option></option>
                     {% for item in reviewers %}
                     <option value = {{item.reviewer_id}}>{{item.reviewer_name}}</option>
                     {% endfor %}
