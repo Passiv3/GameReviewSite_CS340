@@ -98,18 +98,19 @@ def reviewerPage():
 
     return render_template("reviewers.html", reviewers = Reviewers)
 
-@app.route('/delete/<location>/<int:id1>')
+@app.route('/delete/<location>/<int:id1>/None')
 @app.route('/delete/<location>/<int:id1>/<int:id2>', methods = ["POST", "GET"])
 def deletePage(location, id1, id2 = None):
     db_connection = db.connect_to_database()
     if request.method == "GET":
         if location == "review":
             query = "DELETE FROM Reviews WHERE review_id = '%s';" %(id1)
-            updateQuery = """UPDATE Reviewers
-                            SET number_of_review = number_of_review - 1
-                            WHERE reviewer_id = ('%s');"""%(id2)
+            if id2 != None:
+                updateQuery = """UPDATE Reviewers
+                                SET number_of_review = number_of_review - 1
+                                WHERE reviewer_id = ('%s');"""%(id2)
+                cur = db.execute_query(db_connection = db_connection, query = updateQuery)
             cur = db.execute_query(db_connection = db_connection, query = query)
-            cur = db.execute_query(db_connection = db_connection, query = updateQuery)
         elif location == "genre":
             query = "DELETE FROM GameGenres WHERE game_id = '%s' and genre_id = '%s';" %(id1, id2)
             cur = db.execute_query(db_connection = db_connection, query = query)
@@ -123,7 +124,7 @@ def editPage(id):
         query = """SELECT review_id, game_name, reviewer_name, review_date, rating, review_content
                    FROM Reviews 
                    JOIN Games ON Reviews.game_id = Games.game_id
-                   JOIN Reviewers ON Reviews.reviewer_id = Reviewers.reviewer_id
+                   LEFT JOIN Reviewers ON Reviews.reviewer_id = Reviewers.reviewer_id
                    WHERE review_id = %s;""" %(id)
         cursor = db.execute_query(db_connection=db_connection, query = query)
         nowEditing = cursor.fetchall()
@@ -253,6 +254,6 @@ def about():
 # Listener
 if __name__ == "__main__":
     # Port is second argument here
-    port = int(os.environ.get('PORT', 59123)) 
+    port = int(os.environ.get('PORT', 59129)) 
     
     app.run(port=port, debug = True) 
